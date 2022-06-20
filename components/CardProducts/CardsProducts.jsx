@@ -1,25 +1,57 @@
+import useAdmin from '../../Hooks/useAdmin'
 import ButtonsCard from '../Buttons/ButtonsCard'
 
-const CardsProducts = () => {
+const CardsProducts = ({setViewModal, setEditProduct}) => {
+
+
+  const { products } = useAdmin()
+
+
   return (
 
-    <div className="flex flex-col gap-3 shadow-2xl p-4 bg-slate-200 rounded-xl">
+      <>
+        {products.length > 0 ? products.map(prod => ( 
 
-        <div className=" relative w-40 h-40 overflow-hidden mx-auto rounded-md">
-            <img width={160} className="object-cover absolute"
-            src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTIchvcb782DgPvtiZ3b2BffX4PrIdHm7Yxiw-pZoIRupJ9hURO0Qdwk4rIjP2UHj85jWq7lEGdza4_&usqp=CAc" alt="" />
-        </div>
+          <div key={prod._id} className="flex flex-col gap-3 shadow-2xl p-4 bg-slate-200 rounded-xl w-64">
 
-        <div className="my-5 flex justify-between items-center">
-            <p>Remera</p>
-            <p>$2300</p>
-        </div>
-        
-        <ButtonsCard text="Editar" edit={true}/>
+            <div className=" relative w-40 h-40 overflow-hidden mx-auto rounded-md">
+                <img width={160} className="object-cover absolute"
+                src={prod.urlImg} alt="" />
+            </div>
 
-        <ButtonsCard text="Eliminar" edit={false}/>
+    
+            <div className="my-5 flex justify-between items-center capitalize h-10">
+                <p>{prod.name}</p>
+                <p>${prod.price}</p>
+            </div>
 
-    </div>
+
+            <div className='grid gap-3'>
+              <p className="font-semibold text-sm uppercase">Stock: <span className="font-normal">{prod.stock}</span></p>
+              <p  className="font-semibold text-sm uppercase">Categoria: <span className="font-normal">{prod.categories}</span></p>
+              <p className="h-20 overflow-y-auto font-semibold text-sm uppercase">Descripción: <span className="font-normal">{prod.description}</span></p>
+            </div>
+
+            
+            <ButtonsCard text="Editar" click={() => {
+
+              setEditProduct(prod)
+              setViewModal(true)
+              
+            }}/>
+    
+            <ButtonsCard text="Eliminar" />
+
+          </div>
+
+
+        )) : null}
+
+
+{/* <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque recusandae voluptatibus quod maiores, cumque debitis in ratione ad.</p> */}
+      
+      </>
+
   )
 }
 

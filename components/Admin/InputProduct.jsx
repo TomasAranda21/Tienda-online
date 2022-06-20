@@ -3,7 +3,7 @@ import React from 'react'
 const InputProduct = ({onChange, onBlur, name, type, touched, value, label}) => {
   return (
 
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 capitalize">
         <label htmlFor={name} className="text-md"> {label} </label>
             <input 
             type={type}

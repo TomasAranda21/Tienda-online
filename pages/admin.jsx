@@ -17,8 +17,6 @@ const Admin = ({children}) => {
 
             </Head>
 
-            <Navbar/>
-
             <div className="">
 
                 <div className="bg-slate-300 h-screen">

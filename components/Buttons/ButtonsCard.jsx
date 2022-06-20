@@ -1,14 +1,14 @@
 import React from 'react'
 
-const ButtonsCard = ({type, text, clases, edit}) => {
-
-    const color = edit ? "blue" : "red"
+const ButtonsCard = ({type, text, click}) => {
 
   return (
 
-    <button type={type} 
-        className={`rounded-md text-${color}-700 border-${color}-400 border-2 font-semibold p-1 capitalize`}
-    >{text}
+    <button type={type} onClick={click}
+    
+        className={text === 'Editar' ? `rounded-md text-blue-700 border-blue-400 border-2 font-semibold p-1 capitalize` : `rounded-md text-red-700 border-red-400 border-2 font-semibold p-1 capitalize`}
+   
+   >{text}
     
     </button>
 
