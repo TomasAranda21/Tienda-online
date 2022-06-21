@@ -32,3 +32,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+
+
+
+
+Hola red, ¿como estan? Estoy buscando a alguien que quiera hacer este proyecto con conmigo y se trata de una Authentication App 
+
+En este link de dejan los detalles que tienen que tener la app:
+
+Proyecto Aqui: https://devchallenges.io/challenges/N1fvBjQfhlkctmwj1tnw
+
+Las tecnologias que utilizaremos:
+
+Backend: NodeJS y MongoDB
+Frontend: React o NextJS
+
+Por favor si conocen a alguien que le pueda interesar compartanle o etiquentenlo
+
+Muchas gracias

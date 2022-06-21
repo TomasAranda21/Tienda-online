@@ -57,7 +57,6 @@ const FormCategories = ({addCategories, id, categorias, deleteCategory}) => {
                 {categorias?.map(cat => (
 
                         <div key={cat._id}>
-                            {/* Revizar que no esten repetidos ya que react daria error */}
         
                             <p className="font-bold bg-red-300 p-1 px-2 rounded-md flex flex-nowrap items-center gap-2"> {cat.categories} 
                             

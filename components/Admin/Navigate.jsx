@@ -29,7 +29,7 @@ const Navigate = () => {
 
               <LinksNavigate text="Clientes"/>
 
-              <LinksNavigate text="Ventas"/>
+              <LinksNavigate text="Pages"/>
               
 
 
