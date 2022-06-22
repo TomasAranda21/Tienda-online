@@ -16,7 +16,7 @@ const AllProducts = () => {
 
     const [editProduct, setEditProduct] = useState({})
 
-    const {addProducts} = useAdmin()
+    const {addProducts, deleteProduct} = useAdmin()
 
 
 
@@ -49,7 +49,7 @@ const AllProducts = () => {
 
         <div className="flex justify-center gap-4 flex-wrap p-5">
 
-            <CardsProducts setViewModal={setViewModal} setEditProduct={setEditProduct}/>
+            <CardsProducts setViewModal={setViewModal} setEditProduct={setEditProduct} deleteProduct={deleteProduct}/>
 
         </div>
         </>

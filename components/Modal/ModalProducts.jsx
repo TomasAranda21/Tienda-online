@@ -7,6 +7,11 @@ const ModalProducts = ({product, closeModal}) => {
 
     const { editProduct } = useAdmin()
 
+    const color = product?.color?.toString()
+
+    const talle = product?.talle?.toString()
+
+
   return (
 
     <div className="absolute w-full top-0 pt-5 left-0  h-screen backdrop-brightness-50">
@@ -18,7 +23,7 @@ const ModalProducts = ({product, closeModal}) => {
 
         </div>
         
-        <div className="">
+
             <FormProducts
             name = {product.name}
             price = {product.price}
@@ -30,19 +35,15 @@ const ModalProducts = ({product, closeModal}) => {
 
             _id = {product._id}
 
-            color= {product.color}
-            talle = {product.talle}
+            color= {color}
+            talle = {talle}
 
             closeModal = {closeModal}
 
             functionProducts = {editProduct}
             
             editing = {true}
-            
             />
-
-        </div>
-        
 
     </div>
 

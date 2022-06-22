@@ -5,6 +5,12 @@ const ModalCardsProducts = ({product, modal}) => {
 
     const [numberProduct, setNumberProduct] = useState(0)
 
+    const [colorProduct, setColorProduct] = useState('')
+
+    const [talleProduct, setTalleProduct] = useState('')
+
+    const [shop, setshop] = useState([])
+
     const refNumber = useRef()
 
 
@@ -16,6 +22,31 @@ const ModalCardsProducts = ({product, modal}) => {
 
             return
         }
+
+    }
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault()
+
+        const {description, name, price, urlImg, _id} = product
+
+        const productCard = {_id, name, price, urlImg ,color: colorProduct, cantidad: numberProduct , talle: talleProduct, description}
+
+        if(productCard._id === productCard._id){
+            
+        } 
+
+        
+        setshop([...shop, productCard])
+
+
+        // Validar si el usuario esta poniendo el mismo producto, en el caso de esta poniendo el mismo producto que este  se añada pero que cambie
+        // en numero de veces
+
+        const cardLocalStorage = JSON.stringify(shop)
+
+        localStorage.setItem('products00142979120', cardLocalStorage)
 
     }
 
@@ -49,53 +80,59 @@ const ModalCardsProducts = ({product, modal}) => {
                         </div>
 
 
-                        <div className="flex flex-col gap-8 w-full mx-auto">
+                        {/* <div className="flex flex-col gap-8 w-full mx-auto"> */}
 
-                            <SelectProduct product={product} text={'talle'}>
-                                {product?.talle?.map(talle => (
+                            <form action="" className="flex flex-col gap-8 w-full mx-auto" onSubmit={handleSubmit}>
 
-                                <option value={talle} key={talle} className="capitalize">{talle}</option>
+                                <SelectProduct product={product} text={'talle'} onChange={(e) => setTalleProduct(e.target.value)} value={talleProduct}>
+                                    {product?.talle?.map(talle => (
 
-                                ))}
-                            </SelectProduct>
+                                    <option value={talle} key={talle} className="capitalize">{talle}</option>
 
-
-                            <SelectProduct product={product} text={'color'}>
-                                {product?.color?.map(color => (
-
-                                <option value={color} key={color} className="capitalize">{color}</option>
-
-                                ))}
-                            </SelectProduct>
+                                    ))}
+                                </SelectProduct>
 
 
+                                <SelectProduct product={product} text={'color'} onChange={(e) => setColorProduct(e.target.value)} value={colorProduct}>
+                                    {product?.color?.map(color => (
 
-                            <div className="flex flex-col gap-8">
+                                    <option value={color} key={color} className="capitalize">{color}</option>
 
-                                <div className="flex mx-auto gap-2 w-32 h-12 rounded-sm overflow-hidden border-2">
+                                    ))}
+                                </SelectProduct>
 
-                                    <button className="w-11 text-xl border-r-2 font-bold"
-                                    onClick={() => handleDelete()}
 
-                                    >-</button>
 
-                                    <input type="number" className="w-11 text-center outline-none" ref={refNumber} value={numberProduct} 
+                                <div className="flex flex-col gap-8">
 
-                                    onChange={() => setNumberProduct(numberProduct)}/> 
+                                    <div className="flex mx-auto gap-2 w-32 h-12 rounded-sm overflow-hidden border-2">
 
-                                    <button onClick={() => setNumberProduct( numberProduct + 1)}
+                                        <button className="w-11 text-xl border-r-2 font-bold" type="button"
+                                        onClick={() => handleDelete()}
+
+                                        >-</button>
+
+                                        <input type="number" className="w-11 text-center outline-none" ref={refNumber} value={numberProduct} 
+
+                                        onChange={() => setNumberProduct(numberProduct)}/> 
+
+                                        <button onClick={() => setNumberProduct( numberProduct + 1)} type="button"
+                                        
+                                        className=" w-11 text-xl border-l-2 font-bold">+</button>
+
+                                    </div>
+
+
+                                    <button type='submit'
                                     
-                                    className=" w-11 text-xl border-l-2 font-bold">+</button>
+                                    className="bg-indigo-400 p-3 w-2/3 mx-auto rounded text-gray-50 font-bold uppercase">Añadir al carrito</button>
+
 
                                 </div>
+                            </form>
 
-
-                                <button className="bg-indigo-400 p-3 w-2/3 mx-auto rounded text-gray-50 font-bold uppercase">Añadir al carrito</button>
-
-
-                            </div>
                         
-                        </div>
+                        {/* </div> */}
 
                     </div>
                 </div>

@@ -26,7 +26,7 @@ const Tienda = () => {
 
 
     <>
-    <div className="relative h-screen">
+    <div className=" h-screen">
         <div className="container mx-auto  ">
 
             <div className="flex gap-3">

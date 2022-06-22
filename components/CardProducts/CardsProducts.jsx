@@ -1,7 +1,7 @@
 import useAdmin from '../../Hooks/useAdmin'
 import ButtonsCard from '../Buttons/ButtonsCard'
 
-const CardsProducts = ({setViewModal, setEditProduct}) => {
+const CardsProducts = ({setViewModal, setEditProduct, deleteProduct}) => {
 
 
   const { products } = useAdmin()
@@ -40,7 +40,7 @@ const CardsProducts = ({setViewModal, setEditProduct}) => {
               
             }}/>
     
-            <ButtonsCard text="Eliminar" />
+            <ButtonsCard text="Eliminar" click={() => deleteProduct(prod)} />
 
           </div>
 

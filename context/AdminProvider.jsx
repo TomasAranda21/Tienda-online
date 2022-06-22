@@ -24,6 +24,8 @@ export const AdminProvider = ({children}) => {
 
     const [viewModal, setViewModal] = useState(false)
 
+    const [userId, setUserId] = useState()
+
 
 
     
@@ -68,6 +70,14 @@ export const AdminProvider = ({children}) => {
 
               prod.map(p => setProducts(p))
 
+
+              // Get id user
+              const userId = list.map(user => user.id)
+            
+              const id = userId.toString()
+
+
+              setUserId(id)
               
 
 
@@ -135,15 +145,8 @@ export const AdminProvider = ({children}) => {
 
       const { id, name, price, stock, description, talle, color, categories, _id, urlImg } = values;
 
-      const arrayValues = (value) => {
-
-        const valueArray = value.split(',')
-
-        return valueArray
-      }
-
-      const arrayTalle = arrayValues(talle)
-      const ArrayColor = arrayValues(color)
+      const arrayTalle = talle?.split(',')
+      const ArrayColor = color?.split(',')
 
       const newProduct = {
         
@@ -157,9 +160,6 @@ export const AdminProvider = ({children}) => {
       const productsUpdate = products.filter(prod => prod._id !== _id)
 
       productsUpdate.push(newProduct)
-
-      console.log(productsUpdate)
-
 
 
       const productsRef = doc(db, `users`, id);
@@ -175,9 +175,24 @@ export const AdminProvider = ({children}) => {
 
     // Delete Products
 
-    const deleteProduct = async (id) => {
+    const deleteProduct = async (data) => {
 
-      console.log(id)
+
+      const ProductRef = doc(db, 'users', userId);
+
+      try {
+        
+        await updateDoc(ProductRef, {
+  
+          products: products.filter(products => products._id !== data._id)
+          
+        });
+
+      } catch (error) {
+
+        console.log(error)
+        
+      }
 
     }
 
@@ -243,25 +258,25 @@ export const AdminProvider = ({children}) => {
 
     }
 
-    const edit = async () => {
+    // const edit = async () => {
 
-      const categoryRef = doc(db, 'users', id);
+    //   const categoryRef = doc(db, 'users', id);
 
-      try {
+    //   try {
         
-        await updateDoc(categoryRef, {
+    //     await updateDoc(categoryRef, {
   
-          datos_tienda: dataBus.filter(categories => categories._id === _id)
+    //       datos_tienda: dataBus.filter(categories => categories._id === _id)
           
-        });
+    //     });
 
-      } catch (error) {
+    //   } catch (error) {
 
-        console.log(error)
+    //     console.log(error)
         
-      }
+    //   }
 
-    }
+    // }
 
 
 
@@ -316,6 +331,7 @@ export const AdminProvider = ({children}) => {
         editDataBus,
         deleteImg,
         setViewModal,
+        deleteProduct,
         users,
         categorias,
         dataBus,

@@ -184,6 +184,7 @@ const FormProducts =  ( {name, price, stock, categories, description, talle,colo
                   const values = {name, price, stock,categories,color, talle, description, id, urlImg, _id}
   
                   try {
+                  
         
                     await functionProducts(values)
       
