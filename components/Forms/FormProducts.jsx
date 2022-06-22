@@ -1,6 +1,6 @@
 import {Formik} from 'formik'
 import React, { useEffect, useState, useRef } from 'react'
-import InputProduct from './InputProduct'
+import InputProduct from '../Admin/InputProduct'
 import useAdmin from '../../Hooks/useAdmin'
 import ButtonsForms from '../Buttons/ButtonsForms'
 import { BsPlusSquare } from 'react-icons/Bs';
@@ -11,7 +11,7 @@ import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import idRandom from '../../helpers/idUnique';
 import { storage } from '../../config/firebase' 
  
-const FormProducts =  ( {name, price, stock, categories, description, functionProducts, editing, imgProduct, _id, closeModal } ) => {
+const FormProducts =  ( {name, price, stock, categories, description, talle,color, functionProducts, editing, imgProduct, _id, closeModal } ) => {
 
   
   const {users, categorias, deleteImg} = useAdmin()
@@ -30,8 +30,15 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
 
   const [preview, setPreview] = useState('')
 
+  // const [color, setColor] = useState({})
+
+  // const [talle, setTalle] = useState([])
+
+
+
 
   const fileRef = useRef();
+
 
 
 
@@ -155,11 +162,13 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
           price,
           stock,
           categories,
-          description
+          description,
+          talle,
+          color
         }}
 
 
-        onSubmit={async ({name, price, stock, description, categories}, {resetForm}) => {
+        onSubmit={async ({name, price, stock, description, categories, talle, color}, {resetForm}) => {
 
             const userId = users.map(user => user.id)
             
@@ -172,7 +181,7 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
 
                   const urlImg = imgProduct
 
-                  const values = {name, price, stock,categories, description, id, urlImg, _id}
+                  const values = {name, price, stock,categories,color, talle, description, id, urlImg, _id}
   
                   try {
         
@@ -194,10 +203,10 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
 
                 // Si imgProduct no tiene nada quiere decir que no tenia imagen, y en el caso que si tenga entonces no editamos la foto
 
-                const values = {name, price, stock,categories, description, id, urlImg, _id}
-  
+                const values = {name, price, stock,categories, color, talle,  description, id, urlImg, _id}
+
                 try {
-      
+                  
                   await functionProducts(values)
     
                   resetForm()
@@ -214,7 +223,7 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
    
             }else{
 
-              const values = {name, price, stock,categories, description, id, urlImg}
+              const values = {name, price, stock,categories, color, talle, description, id, urlImg}
 
               try {
     
@@ -239,7 +248,7 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
 
           {({values, handleSubmit, errors, touched, handleChange, setFieldValue }) => (
 
-            <form action="" className={ !editing ? `shadow-2xl flex flex-col w-1/3 p-4 gap-5 rounded-md` : `shadow-2xl flex flex-col w-1/3 p-4 gap-5 rounded-md bg-gray-400`} onSubmit={handleSubmit}>
+            <form action="" className={ !editing ? `shadow-2xl p-4 gap-5 rounded-md` : `shadow-2xl flex flex-col w-1/3 p-4 gap-5 rounded-md bg-gray-400`} onSubmit={handleSubmit}>
                   
                    <div className=" relative w-40 h-40 overflow-hidden mx-auto rounded-md shadow-2xl ">
                   
@@ -301,51 +310,87 @@ const FormProducts =  ( {name, price, stock, categories, description, functionPr
 
 
 
-                  <div className="flex flex-col gap-2 w-1/2 mx-auto">
-                      <InputProduct
-                        type="text"
-                        name="name"
-                        value={values.name}
-                        onChange={handleChange}
-                        label="Nombre"
+                  <div className="flex gap-10 mx-auto p-5">
+                    <div className="flex flex-col gap-5">
 
-                      />
-                      <InputProduct
-                        type="number"
-                        name="price"
-                        value={values.price}
-                        onChange={handleChange}
-                        label="Precio"
-                      />
+                        <InputProduct
+                          type="text"
+                          name="name"
+                          value={values.name}
+                          onChange={handleChange}
+                          label="Nombre"
 
-                      <InputProduct
-                        type="number"
-                        name="stock"
-                        value={values.stock}
-                        onChange={handleChange}
-                        label="stock"
-                      />
+                        />
+                        <InputProduct
+                          type="number"
+                          name="price"
+                          value={values.price}
+                          onChange={handleChange}
+                          label="Precio"
+                        />
 
-                      <label htmlFor="categories">Categoria</label>
-                      <select name="categories" id="categories" className="capitalize"
-                      onChange={handleChange} value={values.categories}>
-                        <option value="">Selecciona una categoria</option>
-                        {categorias?.map(cat => (
+                        <InputProduct
+                          type="number"
+                          name="stock"
+                          value={values.stock}
+                          onChange={handleChange}
+                          label="stock"
+                        />
 
-                            <option value={cat.categories} key={cat._id} >{cat.categories}</option>
-
-                        ))}
-
-                      </select>
-
+                        <div className="flex flex-col gap-1">
+                          <label htmlFor="description">Descripcion</label>
+                          <textarea name="description" id="description" cols="" rows="4" 
+                          value={values.description}
+                          onChange={handleChange}
+                          className="p-1 px-3 rounded-md bg-slate-100"></textarea>
+                        </div>
 
                     </div>
-                    <div className="grid gap-1 w-1/2 mx-auto">
-                      <label htmlFor="description">Descripcion</label>
-                      <textarea name="description" id="description" cols="" rows="4" 
-                      value={values.description}
-                      onChange={handleChange}
-                      className="p-1 px-3 rounded-md bg-slate-100"></textarea>
+                    
+                    <div className="flex flex-col gap-5">
+
+                      <div className="flex flex-col gap-1">
+                        <label htmlFor="categories">Categoria</label>
+                        <select name="categories" id="categories" className="capitalize p-1.5 bg-gray-100 rounded-md"
+                        onChange={handleChange} value={values.categories}>
+                          <option value="">Selecciona una categoria</option>
+                          {categorias?.map(cat => (
+
+                              <option value={cat.categories} key={cat._id} >{cat.categories}</option>
+
+                          ))}
+
+                        </select>
+                      </div>
+
+                        {/* <FormTalle setTalle={setTalle}/> */}
+
+
+
+                        <InputProduct
+                          type="text"
+                          name="talle"
+                          value={values.talle}
+                          onChange={handleChange}
+                          label="Talle"
+
+                        />
+                        <p className="text-sm">Escribir los talles separado por comas ej: s, m, l</p>
+
+
+                        <InputProduct
+                          type="text"
+                          name="color"
+                          value={values.color}
+                          onChange={handleChange}
+                          label="color"
+
+                        />
+                        <p className="text-sm">Escribir los colores separado por comas ej: Rojo, Blanco, Negro</p>
+
+                       
+
+                      </div>
                     </div>
 
 

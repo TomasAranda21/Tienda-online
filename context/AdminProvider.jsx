@@ -90,13 +90,41 @@ export const AdminProvider = ({children}) => {
 
 
     // Add products
-    const addProducts = async ({name, price, stock, description, id, categories, urlImg}) => {
+    const addProducts = async ({name, price, stock, description, id, categories, urlImg, talle, color}) => {
+
+      const arrayValues = (value) => {
+
+        const valueArray = value.split(',')
+
+        return valueArray
+      }
+
+      const arrayTalle = arrayValues(talle)
+      const ArrayColor = arrayValues(color)
+
 
         const userRef = doc(db, "users", id);
 
         await updateDoc(userRef, {
 
-            products: arrayUnion({name, price, stock, description, categories, _id, urlImg})
+            products: arrayUnion
+            (
+              
+              {
+                name,
+                price, 
+                stock,
+                color: ArrayColor,
+                talle: arrayTalle, 
+                description, 
+                categories, 
+                _id,
+                urlImg
+              
+              }
+              
+            )
+
             
         });
 
@@ -105,9 +133,25 @@ export const AdminProvider = ({children}) => {
     // Edit products
     const editProduct = async (values) => {
 
-      const { id, name, price, stock, description, categories, _id, urlImg } = values;
+      const { id, name, price, stock, description, talle, color, categories, _id, urlImg } = values;
 
-      const newProduct = {_id, urlImg , name, price, stock, description, categories}
+      const arrayValues = (value) => {
+
+        const valueArray = value.split(',')
+
+        return valueArray
+      }
+
+      const arrayTalle = arrayValues(talle)
+      const ArrayColor = arrayValues(color)
+
+      const newProduct = {
+        
+      _id, urlImg , name, price, stock, description, categories, color: ArrayColor,
+      talle: arrayTalle
+      }
+
+
 
 
       const productsUpdate = products.filter(prod => prod._id !== _id)

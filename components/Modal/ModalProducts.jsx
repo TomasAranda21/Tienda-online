@@ -1,7 +1,7 @@
 import { Formik } from 'formik'
 import React from 'react'
 import useAdmin from '../../Hooks/useAdmin'
-import FormProducts from '../Admin/FormProducts'
+import FormProducts from '../Forms/FormProducts'
 
 const ModalProducts = ({product, closeModal}) => {
 
@@ -9,7 +9,7 @@ const ModalProducts = ({product, closeModal}) => {
 
   return (
 
-    <div className="absolute w-full top-0 pt-5 left-0 backdrop-blur-2xl h-screen backdrop-brightness-50">
+    <div className="absolute w-full top-0 pt-5 left-0  h-screen backdrop-brightness-50">
 
         <div className="relative text-center top-14">
         <button onClick={() => closeModal(false)}
@@ -27,7 +27,11 @@ const ModalProducts = ({product, closeModal}) => {
             description = {product.description}
 
             imgProduct = {product.urlImg}
+
             _id = {product._id}
+
+            color= {product.color}
+            talle = {product.talle}
 
             closeModal = {closeModal}
 

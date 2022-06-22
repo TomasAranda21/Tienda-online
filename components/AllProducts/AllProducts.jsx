@@ -3,7 +3,7 @@ import CardsProducts from '../CardProducts/CardsProducts'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import FormProducts from '../Admin/FormProducts';
+import FormProducts from '../Forms/FormProducts';
 import { BiSearchAlt } from 'react-icons/Bi';
 import ModalProducts from '../Modal/ModalProducts';
 import useAdmin from '../../Hooks/useAdmin';
@@ -56,7 +56,7 @@ const AllProducts = () => {
 
         : 
 
-        <FormProducts name={""} price={""} stock={""} categories={""} description={""} functionProducts={addProducts} editing={false}/>
+        <FormProducts name={""} price={""} stock={""} color={""} talle={""} categories={""} description={""} functionProducts={addProducts} editing={false}/>
             
         }
 
