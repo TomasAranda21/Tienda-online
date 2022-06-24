@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import useAdmin from '../../Hooks/useAdmin'
+import useTienda from '../../Hooks/useTienda'
 import CardProductsTienda from '../CardProducts/CardProductsTienda'
 import ModalCardsProducts from '../Modal/ModalCardsProducts'
+import NavBar from './NavBar'
 
 const Tienda = () => {
 
     const { products } = useAdmin()
+
+
+    const { addToCard, localStorageShop, deleteOndeProduct } = useTienda()
 
     const [viewModal, setViewModal] = useState(false)
 
@@ -24,8 +29,8 @@ const Tienda = () => {
 
   return (
 
-
-    <>
+      
+      <>
     <div className=" h-screen">
         <div className="container mx-auto  ">
 
@@ -46,7 +51,7 @@ const Tienda = () => {
 
         </div>
         
-        {viewModal && <ModalCardsProducts product = {productModal} modal={setViewModal}/>}
+        {viewModal && <ModalCardsProducts product = {productModal} modal={setViewModal} addToCard = {addToCard}/>}
 
     </div>
     

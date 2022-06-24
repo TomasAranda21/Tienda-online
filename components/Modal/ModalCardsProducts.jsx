@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import SelectProduct from '../Inputs/SelectProduct'
 
-const ModalCardsProducts = ({product, modal}) => {
+const ModalCardsProducts = ({product, modal, addToCard}) => {
 
-    const [numberProduct, setNumberProduct] = useState(0)
+    const [numberProduct, setNumberProduct] = useState(1)
 
     const [colorProduct, setColorProduct] = useState('')
 
@@ -14,7 +14,6 @@ const ModalCardsProducts = ({product, modal}) => {
     const refNumber = useRef()
 
 
-
     const handleDelete = () => {
 
         if(numberProduct > 0){
@@ -22,31 +21,22 @@ const ModalCardsProducts = ({product, modal}) => {
 
             return
         }
-
     }
+    
 
     const handleSubmit = (e) => {
 
         e.preventDefault()
 
-        const {description, name, price, urlImg, _id} = product
-
-        const productCard = {_id, name, price, urlImg ,color: colorProduct, cantidad: numberProduct , talle: talleProduct, description}
-
-        if(productCard._id === productCard._id){
+        try {
             
-        } 
+            addToCard(product, numberProduct, talleProduct, colorProduct)
 
-        
-        setshop([...shop, productCard])
+        } catch (error) {
+            
+            console.log(error)
 
-
-        // Validar si el usuario esta poniendo el mismo producto, en el caso de esta poniendo el mismo producto que este  se añada pero que cambie
-        // en numero de veces
-
-        const cardLocalStorage = JSON.stringify(shop)
-
-        localStorage.setItem('products00142979120', cardLocalStorage)
+        }
 
     }
 

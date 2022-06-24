@@ -2,6 +2,8 @@
 import Head from 'next/head'
 import Navigate from '../../components/Admin/Navigate'
 import NavBar from '../../components/A_Tienda/NavBar'
+import { AdminProvider } from '../../context/AdminProvider'
+import { TiendaProvider } from '../../context/TiendaProvider'
 
 const TiendaLayout = ({children}) => {
 
@@ -19,13 +21,20 @@ const TiendaLayout = ({children}) => {
 
     </Head>
 
-    <NavBar/>
+    <AdminProvider>
+      <TiendaProvider>
 
-    <div className="">
+          <NavBar/>
 
-       {children}
+          <div className="">
 
-    </div>
+            {children}
+
+          </div>
+
+      </TiendaProvider>
+    </AdminProvider>
+
 
 </>
 

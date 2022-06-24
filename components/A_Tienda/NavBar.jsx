@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { AiOutlineShopping } from 'react-icons/Ai';
+import useTienda from '../../Hooks/useTienda';
+import ShoppingModal from '../Modal/ShoppingModal';
 
 const NavBar = () => {
 
+    const [shopModal, setShopModal] = useState(false)
+
+    const { localStorageShop, deleteOndeProduct} = useTienda()
 
 
-    
   return (
 
 
@@ -26,7 +31,7 @@ const NavBar = () => {
 
                 <div className="text-3xl">
 
-                    <button><AiOutlineShopping/></button>
+                    <button onClick={() => setShopModal(true)}><AiOutlineShopping/></button>
 
                     
 
@@ -39,6 +44,11 @@ const NavBar = () => {
         </header>
 
     </div>
+
+
+    {shopModal && <ShoppingModal setShopModal={setShopModal} productsShop={localStorageShop} deleteOndeProduct={deleteOndeProduct}/> }
+
+    
 
     </>
 

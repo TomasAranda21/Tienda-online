@@ -1,28 +1,11 @@
 import React, { useRef, useEffect } from 'react'
+import Link from 'next/link'
 
-const ShoppingModal = ({setShopModal, productsShop}) => {
+
+const ShoppingModal = ({setShopModal, productsShop, deleteOndeProduct}) => {
 
     console.log(productsShop)
 
-
-    const deleteRef = useRef()
-
-    const imgRef = useRef()
-
-    
-    const isHover = (leave) => {
-
-        if(!leave){
-
-            deleteRef.current.classList.remove("hidden")
-
-        }else{
-
-            deleteRef.current.classList.add("hidden")
-
-        }
-
-    }
 
   return (
 
@@ -42,28 +25,29 @@ const ShoppingModal = ({setShopModal, productsShop}) => {
 
                     {productsShop?.map(prod => (
 
-                        <div className="flex gap-3" key={prod._id}>
+                        <div className="flex gap-3 relative" key={prod._id}>
 
-                            <div className="flex gap-3 items-center">
+                            <div className="flex gap-3 items-center ">
 
-                                <div className="relative h-20 w-16 hover:brightness-50" ref={imgRef} onMouseEnter={() => isHover()} onMouseLeave={() => isHover("hidden")}>
+                                <div className="relative h-20 w-16 hover:brightness-75 z-10" >
                                     <div className="h-20 w-16 overflow-hidden " >
                                         <img src={prod.urlImg} alt="" className=" object-cover "/>
                                     </div>
 
 
-                                    <div className="hidden absolute top-1/3 left-1/3 text-xl text-white hover:brightness-200 " ref={deleteRef}>
 
-                                        <button onClick={() => console.log(prod)}>X</button>
-                                        
+                                    <div onClick={() => deleteOndeProduct(prod)}
+                                    className="absolute top-1/3 left-1/3 h-20 w-16 text-red-400 font-black hover:before:content-['X'] z-30 cursor-pointer">
+                                       
                                     </div>
-                                    
                                 </div>
+
 
                                 <div className="text-sm flex flex-col gap-3">
                                     <p>{prod.name}</p>
                                     <p>{`${prod.cantidad} x $${prod.price}`}</p>
                                 </div>
+
                             </div>
 
                         </div>
@@ -76,14 +60,15 @@ const ShoppingModal = ({setShopModal, productsShop}) => {
 
                             <h3>{`Total: $2500`}</h3>
 
+                        <Link href="/shoping-cart">
                             <button onClick={() => setShopModal(false)} className="bg-stone-900 text-white p-3 rounded-md">Comprar ahora</button>
+                        </Link>
 
                         </div>
 
                     </div>
 
                 </div>
-
     </div>
   )
 
