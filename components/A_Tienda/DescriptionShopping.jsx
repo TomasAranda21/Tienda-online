@@ -2,7 +2,14 @@ import React from 'react'
 
 const DescriptionShopping = () => {
   return (
-    <div>DescriptionShopping</div>
+    <div>
+
+        <div>
+          
+        </div>
+
+
+    </div>
   )
 }
 

@@ -9,8 +9,6 @@ const ModalCardsProducts = ({product, modal, addToCard}) => {
 
     const [talleProduct, setTalleProduct] = useState('')
 
-    const [shop, setshop] = useState([])
-
     const refNumber = useRef()
 
 
